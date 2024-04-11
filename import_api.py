@@ -1,5 +1,6 @@
 from hugchat import hugchat
 from hugchat.login import Login
+from hugchat.message import Message
 
 EMAIL = "andreavillartr@gmail.com"
 PASSWD = "HK3pJde@feAQge"
@@ -12,5 +13,6 @@ chatbot = hugchat.ChatBot(cookies=cookies.get_dict())  # or cookie_path="usercoo
 
 
 def response(text):
-    query_result = chatbot.chat(text)
+    query_result: Message = chatbot.chat(text)
     print(query_result)
+    return query_result

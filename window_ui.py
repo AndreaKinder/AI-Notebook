@@ -1,48 +1,45 @@
-import customtkinter
-from import_api import response
-import tracemalloc
-import asyncio
-
-tracemalloc.start()
-
-pregunta = ""
+import customtkinter as ctk
+from logg_window import crate_wondow_log
 
 
-async def question():
-    pregunta_pendiente = entry.get()
-    print(pregunta_pendiente)
-    return pregunta_pendiente
+class MyLogButton(ctk.CTkButton):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+        self.configure(text="Log", width=30, command=crate_wondow_log)
 
 
-async def respuesta():
-    respuesta_pendiente = await response(text=await question())
-    print(respuesta_pendiente)
-    return respuesta_pendiente
+class PromptEntry(ctk.CTkEntry):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+        self.configure(width=300)  # Set the width for the entry
 
 
-async def resolucion():
-    await question()
-    await respuesta()
+class MyFrame(ctk.CTkFrame):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+        self.label = ctk.CTkLabel(self, text="")
+        self.label.grid(padx=100, pady=230)
+
+        self.my_entry = PromptEntry(master=self, width=290)
+        self.my_entry.grid(padx=10, pady=1)
 
 
-def start_asyncio_loop():
-    loop = asyncio.get_event_loop()
-    if not loop.is_running():
-        asyncio.ensure_future(resolucion())
-        loop.run_forever()
+class App(ctk.CTk):
+    def __init__(self):
+        super().__init__()
+        self.title("Chat Bot")
+        self.geometry("400x600")
+        self.grid_rowconfigure(2, weight=1)
+        self.grid_columnconfigure(2, weight=2)
+
+        self.my_frame = MyFrame(master=self)
+        self.my_frame.grid(row=2, column=1, padx=10, pady=10)  # Grid positioning
+
+        self.my_log_button = MyLogButton(master=self)
+        self.my_log_button.grid(row=2, column=0, padx=5, pady=5)
 
 
-customtkinter.set_appearance_mode("System")
-customtkinter.set_default_color_theme("blue")
-
-app = customtkinter.CTk()
-app.geometry("600x440")
-
-entry = customtkinter.CTkEntry(app, width=500, textvariable=pregunta, placeholder_text="CTkEntry")
-entry.place(relx=0.5, rely=0.8, anchor=customtkinter.CENTER)
-
-# Bind the Return key to a function that starts the asyncio loop
-entry.bind("<Return>", lambda event: start_asyncio_loop())
-
+app = App()
 app.mainloop()
+
 
