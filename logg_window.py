@@ -1,5 +1,7 @@
 import customtkinter as ctk
 from log import capture_log
+from log import read_log
+
 
 class InputUs(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
@@ -46,6 +48,7 @@ class App(ctk.CTk):
             new_paswd = self.input_passwd.entry_new_passwd.get()
             capture_log(us=new_us, paswd=new_paswd)
             self.destroy()
+            read_log()
 
         self.log_button = ButtonLog(master=self, text="Logg In", command=loggin)
 
