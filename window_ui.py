@@ -11,7 +11,7 @@ class MyLogButton(ctk.CTkButton):
 class PromptEntry(ctk.CTkEntry):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
-        self.configure(width=300)  # Set the width for the entry
+        self.configure(width=300)
 
 
 class MyFrame(ctk.CTkFrame):
@@ -33,7 +33,7 @@ class App(ctk.CTk):
         self.grid_columnconfigure(2, weight=2)
 
         self.my_frame = MyFrame(master=self)
-        self.my_frame.grid(row=2, column=1, padx=10, pady=10)  # Grid positioning
+        self.my_frame.grid(row=2, column=1, padx=10, pady=10)
 
         self.my_log_button = MyLogButton(master=self)
         self.my_log_button.grid(row=2, column=0, padx=5, pady=5)
