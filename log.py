@@ -13,9 +13,7 @@ def capture_log(us, paswd):
         json.dump(data, file)
 
 def read_log():
-    obj_log=object
     with open(file_path, 'r') as log:
-        log_data = json.dump(fp=obj_log, log)
-        print(log_data)
+        log_data = json.load(log)
+        return log_data['us'], log_data['paswd']
 
-read_log()

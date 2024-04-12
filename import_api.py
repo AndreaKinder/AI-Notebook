@@ -1,9 +1,12 @@
 from hugchat import hugchat
 from hugchat.login import Login
 from hugchat.message import Message
+from log import capture_log
 
-EMAIL = "andreavillartr@gmail.com"
-PASSWD = "HK3pJde@feAQge"
+mail, passwd = capture_log()
+
+EMAIL = mail
+PASSWD = mail
 cookie_path_dir = "./cookies/"
 sign = Login(EMAIL, PASSWD)
 cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)
