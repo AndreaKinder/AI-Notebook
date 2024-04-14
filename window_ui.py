@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from logg_window import crate_wondow_log
+from import_api import import_log_api
 
 
 class MyLogButton(ctk.CTkButton):
@@ -19,9 +20,13 @@ class MyFrame(ctk.CTkFrame):
         super().__init__(master, **kwargs)
         self.label = ctk.CTkLabel(self, text="")
         self.label.grid(padx=100, pady=230)
-
         self.my_entry = PromptEntry(master=self, width=290)
         self.my_entry.grid(padx=10, pady=1)
+        self.my_entry.bind('<Return>', lambda event: text_response_init())
+        def text_response_init():
+            update_question = self.my_entry.get()
+            import_log_api(text=update_question)
+
 
 
 class App(ctk.CTk):

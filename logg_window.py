@@ -1,7 +1,6 @@
 import customtkinter as ctk
-from log import capture_log
-from log import read_log
-
+from create_log import capture_log
+from create_log import read_log
 
 class InputUs(ctk.CTkFrame):
     def __init__(self, master, **kwargs):

@@ -12,8 +12,8 @@ def capture_log(us, paswd):
     with open(file_path, 'w') as file:
         json.dump(data, file)
 
+
 def read_log():
     with open(file_path, 'r') as log:
         log_data = json.load(log)
         return log_data['us'], log_data['paswd']
-
