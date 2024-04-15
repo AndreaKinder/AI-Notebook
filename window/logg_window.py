@@ -1,7 +1,8 @@
 import customtkinter as ctk
-from create_log import capture_log
-from create_log import read_log
+from logs.create_log import capture_log
+from logs.create_log import read_log
 
+#TODO Customize UI
 class InputUs(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -33,7 +34,7 @@ class ButtonLog(ctk.CTkButton):
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("Loggin")
+        self.title("Logging")
         self.geometry("500x150")
 
         self.grid_columnconfigure(0, weight=1)
@@ -42,21 +43,20 @@ class App(ctk.CTk):
         self.input_us = InputUs(master=self)
         self.input_passwd = InputPasswd(master=self)
 
-        def loggin():
+        def logging():
             new_us = self.input_us.entry_new_us.get()
-            new_paswd = self.input_passwd.entry_new_passwd.get()
-            capture_log(us=new_us, paswd=new_paswd)
+            new_passwd = self.input_passwd.entry_new_passwd.get()
+            capture_log(us=new_us, passwd=new_passwd)
             self.destroy()
             read_log()
 
-        self.log_button = ButtonLog(master=self, text="Logg In", command=loggin)
+        self.log_button = ButtonLog(master=self, text="Logg In", command=logging)
 
         self.input_us.grid(row=0)
         self.input_passwd.grid(row=1)
         self.log_button.grid(row=2)
 
 
-
-def crate_wondow_log():
+def create_window_log():
     app = App()
     app.mainloop()
