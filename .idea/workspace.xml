@@ -4,22 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d189e69b-c19a-40d7-a202-627a3f0c32c2" name="Changes" comment="update log.py and capture logdate">
-      <change afterPath="$PROJECT_DIR$/chatbot_configs/chatbot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chatbot_configs/import_api.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logs/directory_guide.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/window/chatbot_layout.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/window/note_layout.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/window/tabs.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/window/window_ui.py" afterDir="false" />
+    <list default="true" id="d189e69b-c19a-40d7-a202-627a3f0c32c2" name="Changes" comment="Add layout NoteGenerate">
+      <change afterPath="$PROJECT_DIR$/chatbot_configs/import_copilot_code.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatbot_configs/translator_import.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatbot.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/check_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/logs/check_log.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/logs/create_log.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/import_api.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logg_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/window/logg_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_ui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot_configs/chatbot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatbot_configs/import_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatbot_configs/import_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/check_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/logs/check_log.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/directory_guide.py" beforeDir="false" afterPath="$PROJECT_DIR$/logs/directory_guide.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/window/chatbot_layout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/window/note_layout.py" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/note_layout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/window/tabs.py" beforeDir="false" afterPath="$PROJECT_DIR$/window/tabs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/window/window_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/window/window_ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,11 +56,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/layouts" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/chatbot_configs" />
       <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$/logs" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/window" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
@@ -212,13 +208,22 @@
       <option name="project" value="LOCAL" />
       <updated>1712939971381</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add layout NoteGenerate">
+      <option name="closed" value="true" />
+      <created>1713206217600</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1713206217600</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add logg_window.py" />
     <MESSAGE value="save credentials in file log.py" />
     <MESSAGE value="update log.py and capture logdate" />
-    <option name="LAST_COMMIT_MESSAGE" value="update log.py and capture logdate" />
+    <MESSAGE value="Add layout NoteGenerate" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add layout NoteGenerate" />
   </component>
 </project>

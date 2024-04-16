@@ -10,3 +10,4 @@ def log_directory():
     folder_name = data_directory_folder()
     file_path: str = os.path.join(folder_name, 'log.json')
     return file_path
+

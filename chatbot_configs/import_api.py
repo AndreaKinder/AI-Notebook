@@ -23,3 +23,4 @@ def generate_response(text, email, passwd):
 async def import_text_response(text):
     email, passwd = read_log()
     return generate_response(text=text, email=email, passwd=passwd)
+
