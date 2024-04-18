@@ -38,9 +38,3 @@ class MyFrameTranslate(ctk.CTkFrame):
             self.response_text.insert(END, response)
             self.response_text.config(state="disabled")
 
-    def export_to_markdown_translate(self):
-        file_path = fd.asksaveasfilename(defaultextension=".md", filetypes=[("Markdown files", "*.md")])
-        if file_path:
-            text_to_export = self.response_text.get("1.0", END)
-            with open(file_path, "w", encoding="utf-8") as file:
-                file.write(text_to_export)

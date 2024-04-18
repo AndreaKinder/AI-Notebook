@@ -22,6 +22,10 @@ class MyFrameNote(ctk.CTkFrame):
         self.response_text = Text(self, wrap=WORD, height=25, width=35)
         self.response_text.grid(row=2, column=1, padx=20, pady=5, sticky='ew')
         self.response_text.config(state="disabled")
+        self.export_button = ctk.CTkButton(self, text="Export to Markdown", command=self.export_markdown_note)
+        self.export_button.grid(row=3, column=1, padx=20, pady=10, sticky='ew')
+        self.export_button = ctk.CTkButton(self, text="Export to Markdown", command=self.export_markdown_note)
+
 
         self.my_entry.bind('<Return>', lambda event: self.master.after(0, self.print_response_layout))
 
@@ -37,11 +41,6 @@ class MyFrameNote(ctk.CTkFrame):
         self.response_text.insert(END, response)
         self.response_text.config(state="disabled")
 
-    @staticmethod
-    async def proceso(entrada):
-        if check_file_log():
-            response = await import_text_response(text=entrada)
-            return response
 
     def export_markdown_note(self):
         file_path = filedialog.asksaveasfilename(defaultextension=".md", filetypes=[("Markdown files", "*.md")])
@@ -50,5 +49,12 @@ class MyFrameNote(ctk.CTkFrame):
             with open(file_path, "w", encoding="utf-8") as file:
                 file.write(text_to_export)
 
+    @staticmethod
+    async def proceso(entrada):
+        if check_file_log():
+            response = await import_text_response(text=entrada)
+            return response
+
+
+
 #TODO Add Export Text and Storage Text
-#TODO Optiomizar tkinter

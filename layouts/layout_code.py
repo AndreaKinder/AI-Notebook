@@ -22,6 +22,9 @@ class MyFrameCode(ctk.CTkFrame):
         self.response_text.grid(row=2, column=1, padx=20, pady=5, sticky='ew')
         self.response_text.config(state="disabled")
 
+        self.export_button = ctk.CTkButton(self, text="Export to Markdown", command=self.export_to_markdown_code)
+        self.export_button.grid(row=3, column=1, padx=20, pady=10, sticky='ew')
+
         self.my_entry.bind('<Return>', lambda event: self.master.after(0, self.print_response_layout))
 
     def create_text_response_init(self):

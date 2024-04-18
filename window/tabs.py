@@ -20,7 +20,7 @@ class MyFrameTabs:
         self.notebook.add(self.generic_note, text="Notes")
         self.notebook.add(self.consult_code, text="Code")
         self.notebook.add(self.translate, text="Translate")
-        self.notebook.grid(row=0, column=1, sticky='nsew', rowspan=50, columnspan=5)
+        self.notebook.grid(row=0, column=1, sticky='nsew', rowspan=5, columnspan=50)
 
     def get_current_text_widget(self):
         return self.notebook.winfo_children()[self.notebook.index(self.notebook.select())]
