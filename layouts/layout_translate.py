@@ -30,6 +30,7 @@ class MyFrameTranslate(ctk.CTkFrame):
             response_init:str = check_text(text=response_update)
             return response_init
 
+
         def print_response_layout(self):
             self.response_text.config(state="normal")
             self.response_text.delete('1.0', END)
@@ -38,3 +39,5 @@ class MyFrameTranslate(ctk.CTkFrame):
             self.response_text.insert(END, response)
             self.response_text.config(state="disabled")
 
+
+# TODO Add to selector lenguage

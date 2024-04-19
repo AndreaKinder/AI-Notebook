@@ -27,10 +27,12 @@ class MyFrameCode(ctk.CTkFrame):
 
         self.my_entry.bind('<Return>', lambda event: self.master.after(0, self.print_response_layout))
 
+
     def create_text_response_init(self):
         response_update = self.my_entry.get()
         response_init = asyncio.run(self.proceso(entrada=response_update))
         return response_init
+
 
     def export_to_markdown_code(self):
         file_path = fd.asksaveasfilename(defaultextension=".md", filetypes=[("Markdown files", "*.md")])
@@ -39,6 +41,7 @@ class MyFrameCode(ctk.CTkFrame):
             with open(file_path, "w", encoding="utf-8") as file:
                 file.write(text_to_export)
 
+
     def print_response_layout(self):
         response = self.create_text_response_init()
         self.my_entry.delete(0, END)
@@ -46,11 +49,13 @@ class MyFrameCode(ctk.CTkFrame):
         self.response_text.insert(END, response)
         self.response_text.config(state="disabled")
 
+
     @staticmethod
     async def proceso(entrada):
         if check_file_log():
             response = await import_chat_code(text=entrada)
             return response
+
 
 # TODO Add Storage
 # TODO Refactorizar codigo en varios archivos por funcionalidad

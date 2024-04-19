@@ -29,10 +29,12 @@ class MyFrameNote(ctk.CTkFrame):
 
         self.my_entry.bind('<Return>', lambda event: self.master.after(0, self.print_response_layout))
 
+
     def create_text_response_init(self):
         response_update = self.my_entry.get()
         response_init = asyncio.run(self.proceso(entrada=response_update))
         return response_init
+
 
     def print_response_layout(self):
         response = self.create_text_response_init()
@@ -48,6 +50,7 @@ class MyFrameNote(ctk.CTkFrame):
             text_to_export = self.response_text.get("1.0", END)
             with open(file_path, "w", encoding="utf-8") as file:
                 file.write(text_to_export)
+
 
     @staticmethod
     async def proceso(entrada):
