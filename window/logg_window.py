@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from logs.create_log import capture_log
 from logs.create_log import read_log
+from logs.directory_guide import log_directory
 
 #TODO Customize UI
 class InputUs(ctk.CTkFrame):
@@ -58,5 +59,7 @@ class App(ctk.CTk):
 
 
 def create_window_log():
+    file_path = log_directory()
+    open(file_path, 'w').close()
     app = App()
     app.mainloop()
