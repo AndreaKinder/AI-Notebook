@@ -3,6 +3,7 @@ import asyncio
 from tkinter import Entry, Text, WORD, END, filedialog as fd
 from logs.check_log import check_file_log
 from chatbot_configs.import_copilot_code import import_chat_code
+from logs.create_storage import save_code
 
 
 class MyFrameCode(ctk.CTkFrame):
@@ -24,15 +25,13 @@ class MyFrameCode(ctk.CTkFrame):
 
         self.export_button = ctk.CTkButton(self, text="Export to Markdown", command=self.export_to_markdown_code)
         self.export_button.grid(row=3, column=1, padx=20, pady=10, sticky='ew')
-
+        
         self.my_entry.bind('<Return>', lambda event: self.master.after(0, self.print_response_layout))
-
 
     def create_text_response_init(self):
         response_update = self.my_entry.get()
         response_init = asyncio.run(self.proceso(entrada=response_update))
         return response_init
-
 
     def export_to_markdown_code(self):
         file_path = fd.asksaveasfilename(defaultextension=".md", filetypes=[("Markdown files", "*.md")])
@@ -41,7 +40,6 @@ class MyFrameCode(ctk.CTkFrame):
             with open(file_path, "w", encoding="utf-8") as file:
                 file.write(text_to_export)
 
-
     def print_response_layout(self):
         response = self.create_text_response_init()
         self.my_entry.delete(0, END)
@@ -49,11 +47,12 @@ class MyFrameCode(ctk.CTkFrame):
         self.response_text.insert(END, response)
         self.response_text.config(state="disabled")
 
-
     @staticmethod
     async def proceso(entrada):
         if check_file_log():
             response = await import_chat_code(text=entrada)
+            entrada_response = str(response)
+            save_code(input_text=entrada, response_text=entrada_response)
             return response
 
 
