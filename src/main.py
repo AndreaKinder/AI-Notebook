@@ -112,7 +112,7 @@ def check_file_false():
 
 
 def check_file_log():
-    directory = os.path.dirname(file_path)  # Get directory path from file path
+    directory = os.path.dirname(file_path) 
     if check_directory(directory):
         check_file_true()
         return True
@@ -189,7 +189,7 @@ class MyFrameTabs:
 
         self.generic_note = import_frame(master=master)
 
-        self.notebook.add(self.generic_note, text="Notes")
+        self.notebook.add(self.generic_note, text="Hug Chat Notes")
         self.notebook.grid(row=0, column=1, sticky='nsew', rowspan=5, columnspan=50)
 
     def get_current_text_widget(self):
