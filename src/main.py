@@ -7,13 +7,39 @@ from hugchat.login import Login
 import json
 import os
 from datetime import datetime
+from openai import OpenAI
+
 
 folder_name = 'storage'
 
 file_path: str = os.path.join(folder_name, 'log.json')
 
+#Lectura de Open AI
+file_path_Chat_GPT_API = os.path.join(folder_name, 'log_OpenAPI.json')
 
-def capture_log(us, passwd):
+
+def capture_log_openAPI(openAPI):
+    open_api = {'OpenAPI': openAPI}
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
+    with open(file_path, 'w') as file:
+        json.dump(open_api, file)
+
+
+def read_log_OpenAI():
+    if not os.path.exists(file_path_Chat_GPT_API):
+        create_window_log()
+    else:
+        try:
+            with open(file_path_Chat_GPT_API, 'r') as log:
+                log_data_openAPI = json.load(log)
+                return log_data_openAPI['OpenAPI']
+        except json.decoder.JSONDecodeError:
+            create_window_log()
+
+
+#Lectura hugchat
+def capture_log_hug(us, passwd):
     data = {'us': us, 'passwd': passwd}
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
@@ -21,7 +47,7 @@ def capture_log(us, passwd):
         json.dump(data, file)
 
 
-def read_log():
+def read_log_hug():
     if not os.path.exists(file_path):
         create_window_log()
     else:
@@ -32,8 +58,23 @@ def read_log():
         except json.decoder.JSONDecodeError:
             create_window_log()
 
+#importacion Chat GPT
+def import_ChatGPT(openAPI):
+    client = OpenAI(openAPI)
+    response = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "Who won the world series in 2020?"},
+            {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
+            {"role": "user", "content": "Where was it played?"}
+        ]
+    )
+    return response
 
-def import_chat_bot(email, passwd):
+
+#importacion HugChat
+def import_chat_bot_hug(email, passwd):
     EMAIL = email
     PASSWD = passwd
     cookie_path_dir = folder_name
@@ -43,15 +84,15 @@ def import_chat_bot(email, passwd):
     return chatbot
 
 
-def generate_response(text, email, passwd):
-    chatbot = import_chat_bot(email=email, passwd=passwd)
+def generate_response_hug(text, email, passwd):
+    chatbot = import_chat_bot_hug(email=email, passwd=passwd)
     query_result = chatbot.chat(text)
     return query_result
 
 
-async def import_text_response(text):
-    email, passwd = read_log()
-    return generate_response(text=text, email=email, passwd=passwd)
+async def import_text_response_hug(text):
+    email, passwd = read_log_hug()
+    return generate_response_hug(text=text, email=email, passwd=passwd)
 
 
 def check_directory(directory):
@@ -82,8 +123,8 @@ def check_file_log():
 
 
 async def import_chat(text):
-    email, passwd = read_log()
-    chatbot = import_chat_bot(email=email, passwd=passwd)
+    email, passwd = read_log_hug()
+    chatbot = import_chat_bot_hug(email=email, passwd=passwd)
     response = chatbot.chat(text=text)
     return response
 
@@ -183,7 +224,7 @@ class ButtonLog(ctk.CTkButton):
         self.button_action = ctk.CTkButton(self, width=20)
 
 
-class App_login(ctk.CTk):
+class App_login_hug(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Logging")
@@ -198,9 +239,9 @@ class App_login(ctk.CTk):
         def logging():
             new_us = self.input_us.entry_new_us.get()
             new_passwd = self.input_passwd.entry_new_passwd.get()
-            capture_log(us=new_us, passwd=new_passwd)
+            capture_log_hug(us=new_us, passwd=new_passwd)
             self.destroy()
-            read_log()
+            read_log_hug()
 
         self.log_button = ButtonLog(master=self, text="Logg In", command=logging)
 
@@ -214,19 +255,19 @@ def create_window_log():
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
     open(file_path, 'w').close()
-    app = App_login()
+    app = App_login_hug()
     app.mainloop()
 
 
 class MyLogButton(ctk.CTkButton):
-    def __init__(self, master, **kwargs):  # Corrected to include master
-        super().__init__(master, **kwargs)  # Now correctly passing master and **kwargs to super
+    def __init__(self, master, **kwargs):  
+        super().__init__(master, **kwargs)  
         self.configure(text="Log", width=30, command=create_window_log)
 
 
 class OptionsFrame(ctk.CTkFrame):
     def __init__(self, master, **kwargs):
-        super().__init__(master, **kwargs)  # Corrected to include call to super().__init__
+        super().__init__(master, **kwargs)  
         self.my_log_button = MyLogButton(master=self, fg_color="#FF9800", text_color="black")
         self.my_log_button.grid(row=30, column=0, padx=5, pady=5)
 
