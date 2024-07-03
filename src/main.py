@@ -14,7 +14,7 @@ folder_name = 'storage'
 
 file_path: str = os.path.join(folder_name, 'log.json')
 
-#Lectura de Open AI
+
 file_path_Chat_GPT_API = os.path.join(folder_name, 'log_OpenAPI.json')
 
 
@@ -38,7 +38,7 @@ def read_log_OpenAI():
             create_window_log()
 
 
-#Lectura hugchat
+
 def capture_log_hug(us, passwd):
     data = {'us': us, 'passwd': passwd}
     if not os.path.exists(folder_name):
@@ -58,7 +58,6 @@ def read_log_hug():
         except json.decoder.JSONDecodeError:
             create_window_log()
 
-#importacion y generar respuesta Chat GPT
 def import_ChatGPT(openAPI, text):
     client = OpenAI(api_key=openAPI)
     response = client.chat.completions.create(
@@ -71,7 +70,6 @@ def import_ChatGPT(openAPI, text):
     return response.choices[0].message.content
 
 
-#importacion HugChat
 def import_chat_bot_hug(email, passwd):
     EMAIL = email
     PASSWD = passwd
@@ -82,24 +80,22 @@ def import_chat_bot_hug(email, passwd):
     return chatbot
 
 
-#Genearar respuesta chat HugChat
 def generate_response_hug(text, email, passwd):
     chatbot = import_chat_bot_hug(email=email, passwd=passwd)
     query_result = chatbot.chat(text)
     return query_result
 
-#Importar texto del chat de Hugchat con fichero de contraseña y usuario
+
 async def import_text_response_hug(text):
     email, passwd = read_log_hug()
     return generate_response_hug(text=text, email=email, passwd=passwd)
 
 
-#Importar texto del chat de ChatGPT con fichero de la api
 async def import_text_response_chatGPT(text):
     key_OpenAI= read_log_OpenAI()
     return import_ChatGPT(openAPI=key_OpenAI, text=text)
 
-#Comprovacion de directorio exitente .json
+
 def check_directory(directory):
     if os.path.isdir(directory):
         for filename in os.listdir(directory):
